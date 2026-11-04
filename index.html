@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5424a8">
+  <meta name="description" content="DataViz Studio — explore datasets and build beautiful interactive charts in your browser.">
+  <title>DataViz Studio — Interactive Chart & Graph Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="DataViz Studio home">
+        <span class="brand-mark"><i class="fa-symbol">✳</i></span>
+        <span>DataViz<span class="brand-light"> Studio</span><small>MAKE DATA DELIGHTFUL</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span>⌂</span> Overview</a>
+        <a class="nav-link" href="#builder"><span>▥</span> Chart builder</a>
+        <a class="nav-link" href="#gallery"><span>▦</span> Chart gallery</a>
+        <a class="nav-link" href="#dataset"><span>▤</span> Dataset explorer</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card"><span class="tip-spark">✦</span><b>Data, meet design.</b><p>Turn rows and columns into a story worth sharing.</p></div>
+        <div class="profile"><div class="avatar">DS</div><div><b>Studio workspace</b><small>Local session</small></div><span class="online-dot"></span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <b>Overview</b></div>
+        <div class="top-actions"><span class="local-badge"><i></i> Saved in this browser session</span><button class="button button-dark button-small" id="topUpload">＋ Import data</button></div>
+      </header>
+
+      <section class="hero" id="overview">
+        <div class="hero-content">
+          <div class="eyebrow"><span>✦</span> YOUR CREATIVE DATA WORKSPACE</div>
+          <h1>Make your data<br><em>tell a story.</em></h1>
+          <p>Explore patterns, build beautiful charts, and turn raw numbers into your next big insight.</p>
+          <div class="hero-actions"><a class="button button-coral" href="#builder">Build a chart <span>↗</span></a><button class="button button-glass" id="heroUpload">↑ Upload a dataset</button></div>
+          <div class="hero-footnote"><span class="tiny-check">✓</span> Private by design · Files stay in your browser</div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <div class="floating-card mini-card"><span class="mini-icon">↗</span><div><small>Revenue trend</small><b>+18.6%</b></div><svg viewBox="0 0 110 38"><path d="M2 31 C15 29 18 17 30 22 S47 27 58 14 S76 21 86 8 S99 11 108 3" fill="none" stroke="#36d7bc" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <div class="art-chart"><div class="art-chart-head"><span></span><span></span><span></span></div><div class="art-bars"><i style="height:35%"></i><i style="height:58%"></i><i style="height:46%"></i><i style="height:82%"></i><i style="height:65%"></i><i style="height:100%"></i><i style="height:76%"></i></div><div class="art-chart-base"></div></div>
+          <div class="floating-card donut-card"><div class="donut-art"></div><div><small>Data mix</small><b>4 segments</b></div></div>
+          <div class="art-spark">✳</div><div class="art-dot dot-a"></div><div class="art-dot dot-b"></div>
+        </div>
+        <div class="hero-wave"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><div class="eyebrow purple-eyebrow">AT A GLANCE</div><h2>Your dataset, <span>decoded.</span></h2></div><span class="muted" id="datasetName">Sample sales dataset</span></div>
+        <div class="stats-grid">
+          <article class="stat-card stat-violet"><div class="stat-top"><span>Total records</span><span class="stat-icon">▤</span></div><strong id="totalRecords">30</strong><small><span class="trend-up">↗</span> Rows in your dataset</small><div class="stat-decoration">01</div></article>
+          <article class="stat-card stat-pink"><div class="stat-top"><span>Total columns</span><span class="stat-icon">▦</span></div><strong id="totalColumns">7</strong><small>Fields available to explore</small><div class="stat-decoration">02</div></article>
+          <article class="stat-card stat-mint"><div class="stat-top"><span>Average sales</span><span class="stat-icon">∿</span></div><strong id="averageValue">₹ 0</strong><small>Mean of visible sales values</small><div class="stat-decoration">03</div></article>
+          <article class="stat-card stat-yellow"><div class="stat-top"><span>Highest sales</span><span class="stat-icon">↗</span></div><strong id="maximumValue">₹ 0</strong><small>Maximum visible sales value</small><div class="stat-decoration">04</div></article><article class="stat-card stat-pink"><div class="stat-top"><span>Lowest sales</span><span class="stat-icon">↘</span></div><strong id="minimumValue">₹ 0</strong><small>Minimum visible sales value</small><div class="stat-decoration">05</div></article>
+        </div>
+      </section>
+
+      <section class="content-grid" id="builder">
+        <div class="panel builder-panel">
+          <div class="panel-heading"><div><div class="eyebrow purple-eyebrow">CREATE SOMETHING</div><h2>Chart builder <span class="heading-spark">✳</span></h2><p>Choose your dimensions and let the story unfold.</p></div><span class="step-pill">01 / BUILD</span></div>
+          <form id="chartForm">
+            <label class="field-label" for="chartTitle">Chart title</label><input class="text-input" id="chartTitle" type="text" maxlength="70" value="Monthly sales overview" placeholder="Give your chart a name">
+            <div class="field-row"><div><label class="field-label" for="xColumn">X-axis / Category</label><select id="xColumn" class="select-input"></select></div><div><label class="field-label" for="yColumn">Y-axis / Values</label><select id="yColumn" class="select-input"></select></div></div>
+            <label class="field-label">Choose a chart style</label>
+            <div class="chart-type-grid" id="chartTypes">
+              <button type="button" class="type-option selected" data-type="bar"><span class="type-icon">▥</span><b>Bar</b></button>
+              <button type="button" class="type-option" data-type="line"><span class="type-icon">⌁</span><b>Line</b></button>
+              <button type="button" class="type-option" data-type="pie"><span class="type-icon">◕</span><b>Pie</b></button>
+              <button type="button" class="type-option" data-type="doughnut"><span class="type-icon">◎</span><b>Doughnut</b></button>
+              <button type="button" class="type-option" data-type="radar"><span class="type-icon">✧</span><b>Radar</b></button>
+              <button type="button" class="type-option" data-type="polarArea"><span class="type-icon">◉</span><b>Polar area</b></button>
+            </div>
+            <div class="builder-footer"><span class="builder-note"><span>✦</span> Built from your current filtered data</span><button class="button button-primary" type="submit">Generate chart <span>→</span></button></div>
+          </form>
+        </div>
+        <div class="panel preview-panel">
+          <div class="panel-heading preview-heading"><div><div class="eyebrow coral-eyebrow">LIVE PREVIEW</div><h2>Your canvas</h2></div><span class="live-tag"><i></i> LIVE</span></div>
+          <div class="preview-chart-wrap"><canvas id="previewChart" aria-label="Chart preview"></canvas><div class="empty-state" id="previewEmpty" hidden><span>✳</span><b>Your chart will appear here</b><small>Pick your columns and generate a chart.</small></div></div>
+          <div class="preview-foot"><span><i class="legend-dot"></i> <span id="previewCaption">Sales by Month</span></span><span id="previewCount">30 data points</span></div>
+        </div>
+      </section>
+
+      <section class="panel gallery-panel" id="gallery">
+        <div class="panel-heading gallery-heading"><div><div class="eyebrow purple-eyebrow">YOUR VISUAL LIBRARY</div><h2>Chart gallery <span class="gallery-count" id="galleryCount">1</span></h2><p>Every chart you create, all in one place.</p></div><button class="button button-outline" id="clearCharts">Clear gallery</button></div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </section>
+
+      <section class="content-grid lower-grid">
+        <div class="panel insights-panel">
+          <div class="panel-heading"><div><div class="eyebrow mint-eyebrow">A LITTLE DATA MAGIC</div><h2>Quick insights</h2><p>Automatic observations from your visible data.</p></div><span class="insight-star">✦</span></div>
+          <div id="insightsList" class="insights-list"></div>
+        </div>
+        <div class="panel export-panel">
+          <div class="panel-heading"><div><div class="eyebrow coral-eyebrow">TAKE IT WITH YOU</div><h2>Export studio</h2><p>Share your work beyond this workspace.</p></div><span class="export-icon">⇩</span></div>
+          <button class="export-row" id="exportCsv"><span class="export-file csv-file">CSV</span><span><b>Filtered dataset</b><small>Download visible rows as .csv</small></span><span class="export-arrow">↓</span></button>
+          <button class="export-row" id="exportSummary"><span class="export-file txt-file">TXT</span><span><b>Chart summary</b><small>Download insights and chart details</small></span><span class="export-arrow">↓</span></button>
+          <p class="export-hint">PNG export is available on each chart card.</p>
+        </div>
+      </section>
+
+      <section class="panel dataset-panel" id="dataset">
+        <div class="panel-heading dataset-heading"><div><div class="eyebrow purple-eyebrow">GET YOUR HANDS ON THE DATA</div><h2>Dataset explorer</h2><p>Search, filter, and sort the records behind your visuals.</p></div><div class="dataset-actions"><button class="button button-outline" id="sampleReset">↺ Reset sample</button><button class="button button-primary" id="uploadButton">↑ Upload CSV</button><input type="file" id="fileInput" accept=".csv,text/csv" hidden></div></div>
+        <div class="table-toolbar"><div class="search-wrap"><span>⌕</span><input id="tableSearch" type="search" placeholder="Search all columns..." aria-label="Search dataset"></div><div class="filter-wrap"><label for="filterColumn">Filter by</label><select id="filterColumn" class="select-input compact-select"><option value="">All columns</option></select><select id="filterValue" class="select-input compact-select"><option value="">All values</option></select><button class="clear-filter" id="clearFilter">Clear</button></div><span class="rows-count" id="rowsCount">Showing 30 of 30</span></div>
+        <div class="table-scroll"><table id="dataTable"><thead></thead><tbody></tbody></table></div>
+        <div class="table-footer"><span id="tableStatus">Showing sample dataset</span><div class="table-pagination"><button id="prevPage" aria-label="Previous page">←</button><span id="pageInfo">1 / 2</span><button id="nextPage" aria-label="Next page">→</button></div></div>
+      </section>
+      <footer class="footer"><span>✳ <b>DataViz Studio</b> <span class="footer-muted">— Make data delightful.</span></span><span>Made for curious minds <span class="footer-heart">♥</span></span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
